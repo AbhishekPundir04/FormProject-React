@@ -9,6 +9,7 @@ import classes from './AddUser.module.css';
 const AddUser = (props) => {
   const nameInputRef = useRef();
   const ageInputRef = useRef();
+  const colegName = useRef()
 
   const [error, setError] = useState();
 
@@ -16,7 +17,8 @@ const AddUser = (props) => {
     event.preventDefault();
     const enteredName = nameInputRef.current.value;
     const enteredUserAge = ageInputRef.current.value;
-    if (enteredName.trim().length === 0 || enteredUserAge.trim().length === 0) {
+    const enteredCollegName = colegName.current.value;
+    if (enteredName.trim().length === 0 || enteredUserAge.trim().length === 0 || enteredCollegName.trim().length) {
       setError({
         title: 'Invalid input',
         message: 'Please enter a valid name and age (non-empty values).',
@@ -33,6 +35,7 @@ const AddUser = (props) => {
     props.onAddUser(enteredName, enteredUserAge);
     nameInputRef.current.value = '';
     ageInputRef.current.value = '';
+    colegName.current.value = '';
   };
 
   const errorHandler = () => {
@@ -54,6 +57,8 @@ const AddUser = (props) => {
           <input id="username" type="text" ref={nameInputRef} />
           <label htmlFor="age">Age (Years)</label>
           <input id="age" type="number" ref={ageInputRef} />
+          <label htmlFor= "colegName"> CollegName </label>
+          <input id="coleg" type="text" ref={colegName} />
           <Button type="submit">Add User</Button>
         </form>
       </Card>
